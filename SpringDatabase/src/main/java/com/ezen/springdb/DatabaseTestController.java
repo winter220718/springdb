@@ -99,14 +99,35 @@ public class DatabaseTestController {
 		return "redirect:/test/";
 	}
 	
+	
+	@GetMapping("/board/list")
+	public String boardList(Model model) {
+		model.addAttribute("boards", board_mapper.getAll());
+		
+		
+		return "test/board_list";
+	}
+	
+	@GetMapping("/board/modify")
+	public String modifyBoard(Board board) {
+		
+		board_mapper.update(board);
+		
+
+		return "redirect:/test/board/list";
+		
+	}
+	
 	@GetMapping("/board/delete")
-	public String deleteBoard(Model model, Board board) {
-		board_mapper.delete(board);
-		System.out.println("게시글삭제");
+	public String deleteBoard(Integer board_id) {
+		board_mapper.delete(board_id);
 		
 		
-		return "redirect:/test/";
+		
+		return "redirect:/test/board/list/";
 		
 		
 	}
+	
+	
 }
