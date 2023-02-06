@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -15,7 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ezen.springdb.dto.Board;
+import com.ezen.springdb.dto.BoardDTO;
 import com.ezen.springdb.dto.Employee;
 import com.ezen.springdb.mapper.BoardMapper;
 import com.ezen.springdb.mapper.EmployeeMapper;
@@ -54,15 +55,7 @@ public class DatabaseTestController {
 		){
 			List<Employee> employees = new ArrayList<>();
 			
-			while (rs.next()) {
-				employees.add(new Employee(
-							rs.getInt("employee_id"),
-							rs.getString("first_name"),
-							rs.getString("last_name"),
-							rs.getInt("department_id"),
-							rs.getString("job_id")
-						));
-			}
+		
 			
 			model.addAttribute("employees", employees);
 		} catch (SQLException e) {
@@ -93,7 +86,7 @@ public class DatabaseTestController {
 	}
 	
 	@GetMapping("/board/add")
-	public String addBoard(Model model, Board board) {
+	public String addBoard(Model model, BoardDTO board) {
 		int row = board_mapper.add(board);
 		
 		return "redirect:/test/";
@@ -109,7 +102,7 @@ public class DatabaseTestController {
 	}
 	
 	@GetMapping("/board/modify")
-	public String modifyBoard(Board board) {
+	public String modifyBoard(BoardDTO board) {
 		
 		board_mapper.update(board);
 		
@@ -128,6 +121,6 @@ public class DatabaseTestController {
 		
 		
 	}
-	
+
 	
 }

@@ -6,4 +6,40 @@
   <select id="getAll" resultType="com.ezen.springdb.dto.Employee">
     select * from employees
   </select>
+  
+  <select id="get" resultType="com.ezen.springdb.dto.Employee">
+ 	 select * from employees where employee_id=#{employee_id}
+  </select>
+  
+  <select id="getLessSalary" resultType="com.ezen.springdb.dto.Employee">
+  	select * from employees where salary <![CDATA[<]]> #{salary}
+  </select>
+  <select id="getLastId" resultType="int">
+  select max(employee_id) from employees
+  </select>
+  
+  
+  <insert id="insert" parameterType="com.ezen.springdb.dto.Employee">
+  	<selectKey keyProperty="employee_id" order="BEFORE" resultType="int"> <!-- 인서트 전에 진행해달라 -->
+  	
+  	select employees_seq.nextval from dual;
+  	</selectKey>
+  	insert into employees values(
+  		#{eid},
+  		#{first_name},
+  		#{last_name},
+  		#{email},
+  		#{phone_number},
+  		#{hire_date},
+  		#{job_id},
+  		#{salary},
+  		#{commission_pct},
+  		#{manager_id},
+  		#{department_id}
+  	) 
+  </insert>
+  
+  
 </mapper>
+
+

@@ -27,8 +27,11 @@
 	<!-- db와 연결된 연결체 : sqlSessionFatory / sqlSession에 쿼리문을 전달하면 알아서 연결해서 데이터를 갖고 옴(=이게 mybatis의 능력) -->
 	<bean id="sqlSessionFatory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"/>
+		<property name="configLocation" value="classpath:mybatis-config-base.xml"></property>
 	</bean>
 	
 	<!-- con.ezen.springdb.mapper에 mapper들을 넣어놨으니 해당 mapper를 스캔해주세요 하는 설정 -->
 	<mybatis-spring:scan base-package="com.ezen.springdb.mapper"/>
+	<mybatis-spring:scan base-package="com.ezen.springdb.board.mapper"/>
 </beans>
+

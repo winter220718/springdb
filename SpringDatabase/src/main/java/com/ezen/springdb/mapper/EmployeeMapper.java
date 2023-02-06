@@ -8,8 +8,9 @@ import com.ezen.springdb.dto.Employee;
 
 public interface EmployeeMapper {
 	
-	// 이런 mapper를 만들어달라고 mtbitise에게 부탁
+	// �씠�윴 mapper瑜� 留뚮뱾�뼱�떖�씪怨� mtbitise�뿉寃� 遺��긽
 	@Select("SELECT * FROM employees")
 	public List<Employee> getList();
+	
 	
 }
